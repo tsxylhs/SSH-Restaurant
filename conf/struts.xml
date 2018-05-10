@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+
+	<package name="default" namespace="/" extends="struts-default">
+		<!-- 定义新的拦截器栈,配置prepare拦截器栈为always -->
+		<interceptors>
+			<interceptor-stack name="sshStack">
+				<interceptor-ref name="paramsPrepareParamsStack">
+					<param name="prepare.alwaysInvokePrepare">false</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
+		<!-- 使用新的拦截器栈 -->
+		<default-interceptor-ref name="sshStack"></default-interceptor-ref>
+
+		<!-- 通过spring的bean配置action,这里的class指向的是appliationContext-beans.xml中bean的id -->
+         <!-- 路由与前端jsp 做映射 -->
+		<action name="Login_*" class="loginAction" method="{1}">
+			<result name="login_success">/login/Users_login_success.jsp</result>
+			<result name="login_failure">/initiations/Initiations_login.jsp</result>
+			<result name="logout_success">/initiations/Initiations_login.jsp</result>
+		</action>
+           <!-- 房间管理 -->
+		<action name="Room_*" class="roomAction" method="{1}">
+			<result name="query_success">/rooms/Rooms_query_success.jsp</result>
+			<!--运用chain type,后面接一个action,不再接一个.jsp页面 -->
+			<result name="add_success" type="chain">Room_query</result>
+			<result name="edit_success" type="chain">Room_query</result>
+			<result name="status_success">/rooms/Rooms_status.jsp</result>
+			<result name="apply_success">/rooms/Rooms_modify.jsp</result>
+		</action>
+               <!-- 会员管理 -->
+		<action name="Member_*" class="memberAction" method="{1}">
+			<result name="query_success">/rooms/Rooms_query_success2.jsp</result>
+			<result name="queryMB_success">/members/Members_modify.jsp</result>
+			<result name="update_success" type="chain">Admin_queryMB</result>
+			<result name="checkout_success" type="chain">Member_queryMe</result>
+			<result name="report_success" type="chain">Member_queryMe</result>
+			<result name="apply_pay_success">/rooms/apply_pay_success.jsp</result>
+			<result name="pay_success" type="chain">Member_queryMe</result>
+			<result name="signIn_success">/index.jsp</result>
+		</action>
+               <!--会员管理  -->
+		<action name="Admin_*" class="adminAction" method="{1}">
+			<result name="query_success">/admin/Admin_query_success.jsp</result>
+			<result name="delete_success" type="chain">Admin_queryMB</result>
+			<result name="changeMP_success" type="chain">Admin_queryMB</result>
+		</action>
+		<!--员工的管理 -->
+		<action name="Employee_*" class="employeeAction" method="{1}">
+			<result name="queryAll_success">/employees/Employees_queryAll_success.jsp</result>
+			<result name="query_success">/employees/Employees_modify.jsp</result>
+			<result name="delete_success" type="chain">Employee_queryAll</result>
+			<result name="update_success" type="chain">Employee_queryAll</result>
+			<result name="add_success" type="chain">Employee_queryAll</result>
+		</action>
+
+	</package>
+
+</struts>

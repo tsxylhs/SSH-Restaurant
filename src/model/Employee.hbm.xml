@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-1-9 20:35:13 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="model.Employee" table="EMPLOYEE">
+        <id name="employeeId" type="java.lang.Integer">
+            <column name="EMPLOYEEID" />
+            <generator class="native" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
+        </property>
+        <property name="gender" type="java.lang.String">
+            <column name="GENDER" />
+        </property>
+        <property name="age" type="java.lang.Integer">
+            <column name="AGE" />
+        </property>
+        <property name="employeeYear" type="java.lang.Integer">
+            <column name="EMPLOYEEYEAR" />
+        </property>
+        <property name="salary" type="java.lang.Integer">
+            <column name="SALARY" />
+        </property>
+        <property name="FSalary" type="java.lang.Integer">
+            <column name="FSALARY" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,9 @@
+/action/
+/applicationContext-beans.xml
+/applicationContext.xml
+/dao/
+/db.properties
+/hibernate.cfg.xml
+/model/
+/service/
+/struts.xml

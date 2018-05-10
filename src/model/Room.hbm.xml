@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-10-18 9:30:03 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="model.Room" table="ROOM">
+        <id name="RId" type="java.lang.Integer">
+            <column name="RID" />
+            <generator class="native" />
+        </id>
+        <property name="roomNumber" type="java.lang.Integer">
+            <column name="ROOMNUMBER" />
+        </property>
+        <property name="status" type="java.lang.String">
+            <column name="STATUS" />
+        </property>
+        <many-to-one name="member" class="model.Member" column="MID">
+        </many-to-one>
+        <property name="price" type="java.lang.Double">
+            <column name="PRICE" />
+        </property>
+    </class>
+</hibernate-mapping>

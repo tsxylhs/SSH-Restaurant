@@ -1,0 +1,136 @@
+-- MySQL dump 10.13  Distrib 5.7.20, for Linux (x86_64)
+--
+-- Host: localhost    Database: restaurant
+-- ------------------------------------------------------
+-- Server version	5.7.20-0ubuntu0.16.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `ADMIN`
+--
+
+DROP TABLE IF EXISTS `ADMIN`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ADMIN` (
+  `AID` int(11) NOT NULL AUTO_INCREMENT,
+  `USERNAME` varchar(255) DEFAULT NULL,
+  `PASSWORD` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`AID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ADMIN`
+--
+
+LOCK TABLES `ADMIN` WRITE;
+/*!40000 ALTER TABLE `ADMIN` DISABLE KEYS */;
+INSERT INTO `ADMIN` VALUES (1,'root','root');
+/*!40000 ALTER TABLE `ADMIN` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `EMPLOYEE`
+--
+
+DROP TABLE IF EXISTS `EMPLOYEE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `EMPLOYEE` (
+  `EMPLOYEEID` int(11) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(255) DEFAULT NULL,
+  `GENDER` varchar(255) DEFAULT NULL,
+  `AGE` int(11) DEFAULT NULL,
+  `EMPLOYEEYEAR` int(11) DEFAULT NULL,
+  `SALARY` int(11) DEFAULT NULL,
+  `FSALARY` int(11) DEFAULT NULL,
+  PRIMARY KEY (`EMPLOYEEID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `EMPLOYEE`
+--
+
+LOCK TABLES `EMPLOYEE` WRITE;
+/*!40000 ALTER TABLE `EMPLOYEE` DISABLE KEYS */;
+INSERT INTO `EMPLOYEE` VALUES (2,'黄蓉','女',21,1,8000,120000);
+/*!40000 ALTER TABLE `EMPLOYEE` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MEMBER`
+--
+
+DROP TABLE IF EXISTS `MEMBER`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MEMBER` (
+  `MID` int(11) NOT NULL AUTO_INCREMENT,
+  `USERNAME` varchar(255) DEFAULT NULL,
+  `PASSWORD` varchar(255) DEFAULT NULL,
+  `RANK` int(11) DEFAULT NULL,
+  PRIMARY KEY (`MID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MEMBER`
+--
+
+LOCK TABLES `MEMBER` WRITE;
+/*!40000 ALTER TABLE `MEMBER` DISABLE KEYS */;
+INSERT INTO `MEMBER` VALUES (3,'张无忌','hahaha',4);
+/*!40000 ALTER TABLE `MEMBER` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ROOM`
+--
+
+DROP TABLE IF EXISTS `ROOM`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ROOM` (
+  `RID` int(11) NOT NULL AUTO_INCREMENT,
+  `ROOMNUMBER` int(11) DEFAULT NULL,
+  `STATUS` varchar(255) DEFAULT NULL,
+  `MID` int(11) DEFAULT NULL,
+  `PRICE` double DEFAULT NULL,
+  PRIMARY KEY (`RID`),
+  KEY `FK_stlbah10e6ck38id0odk5p26c` (`MID`),
+  CONSTRAINT `FK_stlbah10e6ck38id0odk5p26c` FOREIGN KEY (`MID`) REFERENCES `MEMBER` (`MID`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ROOM`
+--
+
+LOCK TABLES `ROOM` WRITE;
+/*!40000 ALTER TABLE `ROOM` DISABLE KEYS */;
+INSERT INTO `ROOM` VALUES (1,1000,'使用中',3,1600),(2,1001,'可预订',NULL,800),(3,1002,'可预订',NULL,350),(4,1004,'可预订',NULL,1200),(5,1005,'可预订',NULL,900),(6,1007,'可预订',3,1000),(7,1010,'可预订',NULL,980);
+/*!40000 ALTER TABLE `ROOM` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-01-10 22:43:28

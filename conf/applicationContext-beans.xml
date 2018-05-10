@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+      <!--配置Dao 层，service层， action层  -->
+	<!-- 先配置Dao -->
+	<bean id="adminDao" class="dao.adminDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="loginDao" class="dao.loginDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="memberDao" class="dao.memberDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="roomDao" class="dao.roomDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="employeeDao" class="dao.employeeDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- Dao配置完毕 -->
+
+	<!-- 再配置Service -->
+	<bean id="adminService" class="service.adminService">
+		<property name="adminDao" ref="adminDao"></property>
+	</bean>
+
+	<bean id="loginService" class="service.loginService">
+		<property name="loginDao" ref="loginDao"></property>
+	</bean>
+
+	<bean id="memberService" class="service.memberService">
+		<property name="memberDao" ref="memberDao"></property>
+	</bean>
+
+	<bean id="roomService" class="service.roomService">
+		<property name="roomDao" ref="roomDao"></property>
+	</bean>
+	
+	<bean id="employeeService" class="service.employeeService">
+		<property name="employeeDao" ref="employeeDao"></property>
+	</bean>
+	<!-- Service配置完毕 -->
+
+
+	<!-- 在spring的配置文件中正常配置action -->
+	<bean id="adminAction" class="action.adminAction" scope="prototype">
+		<property name="adminService" ref="adminService"></property>
+	</bean>
+
+	<bean id="loginAction" class="action.loginAction" scope="prototype">
+		<property name="loginService" ref="loginService"></property>
+	</bean>
+
+	<bean id="memberAction" class="action.memberAction" scope="prototype">
+		<property name="memberService" ref="memberService"></property>
+		<property name="roomService" ref="roomService"></property>
+	</bean>
+
+	<bean id="roomAction" class="action.roomAction">
+		<property name="roomService" ref="roomService"></property>
+		<property name="adminService" ref="adminService"></property>
+	</bean>
+	
+	<bean id="employeeAction" class="action.employeeAction">
+		<property name="employeeService" ref="employeeService"></property>
+	 </bean>
+	<!-- action配置完毕 -->
+
+</beans>
